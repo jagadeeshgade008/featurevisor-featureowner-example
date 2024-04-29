@@ -36,7 +36,7 @@ function assignReviewers(users) {
   // );
   console.log("Assigning reviewers:", users);
   const reviewers = users.join(',');
-  return execPromise(`gh pr edit ${pullRequestNumber} --reviewer ${reviewers}`);
+  return execPromise(`gh pr edit ${PULL_REQUEST_NUMBER} --reviewer ${reviewers}`);
 }
 
 const execPromise = (command) => {
