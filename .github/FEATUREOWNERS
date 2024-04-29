@@ -1,15 +1,15 @@
 ##
 # Everything 
 #
-* @username @username2
+* @jagadeeshgade008 @jagadeeshgade008
 
 ##
 # Specific feature (all environments)
 #
-my_feature @username
+my_feature @jagadeeshgade008
 
 ##
 # Specific feature, with specific environments
 #
-my_feature staging @user-1
-my_feature production @user-2
+my_feature staging @jagadeeshgade008
+my_feature production @jagadeeshgade008

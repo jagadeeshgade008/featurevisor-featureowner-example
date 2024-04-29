@@ -9,6 +9,7 @@ on:
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+    HTML_URL: ${{ github.event.pull_request.html_url }}
 
 jobs:
     assign-reviewers:

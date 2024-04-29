@@ -17,6 +17,7 @@ const octokit = new Octokit({
 });
 
 const PULL_REQUEST_NUMBER = process.env.PULL_REQUEST_NUMBER;
+const HTML_URL = process.env.HTML_URL;
 console.log("Pull Request Number:", PULL_REQUEST_NUMBER);
 const ENVIROMENT = process.env.ENVIRONMENT || "staging";
 
@@ -36,7 +37,7 @@ function assignReviewers(users) {
   // );
   console.log("Assigning reviewers:", users);
   const reviewers = users.join(',');
-  return execPromise(`gh pr edit ${PULL_REQUEST_NUMBER} --reviewer ${reviewers}`);
+  return execPromise(`gh pr edit ${PULL_REQUEST_NUMBER} --add-reviewer ${reviewers}`);
 }
 
 const execPromise = (command) => {
