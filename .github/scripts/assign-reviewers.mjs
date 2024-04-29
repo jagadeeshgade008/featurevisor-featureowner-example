@@ -1,10 +1,14 @@
 import fs from "fs";
-import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 import { exec } from "child_process";
 import { parseFeatureOwners } from "./parsefeatureowners.mjs";
 
 import { Octokit } from "@octokit/rest";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Octokit.js
 // https://github.com/octokit/core.js#readme
