@@ -16,6 +16,9 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
+            - name: Print the directory
+              run: ls -la
+
             - name: Assign reviewers
               if: github.event_name == 'pull_request'
               run: node ./.github/scripts/assign-reviewers.js
