@@ -50,14 +50,16 @@ const getFeatureOwners = () => {
 };
 
 const start = async () => {
-  let files = await execPromise(
-    `gh pr diff ${PULL_REQUEST_NUMBER} --color=never`
-  );
-  console.log("Changed files:", files);
-  files = files
-    .split("\n")
+  let diffOutput = await execPromise(`gh pr diff ${PULL_REQUEST_NUMBER} --color=never`);
+
+  let files = diffOutput
+    .split('\n')
+    .filter(line => line.startsWith('diff --git'))
+    .map(line => line.split(' b/')[1])
     .filter(Boolean)
     .filter((file) => file.endsWith(".yml"));
+
+  console.log("Changed files:", files);
 
   const featureFiles = files.filter((file) => file.endsWith(".yml"));
 
