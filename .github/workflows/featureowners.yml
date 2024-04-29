@@ -9,7 +9,6 @@ on:
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
-    HTML_URL: ${{ github.event.pull_request.html_url }}
 
 jobs:
     assign-reviewers:
@@ -17,15 +16,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-
-            - name: Install dependencies
-              run: npm ci
-
-            - name: Print the directory
-              run: cd .github/scripts && ls -la
-
-            - name: Install modules
-              run: npm i @octokit/rest
 
             - name: Assign reviewers
               if: github.event_name == 'pull_request'

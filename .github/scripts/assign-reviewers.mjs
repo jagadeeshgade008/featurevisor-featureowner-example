@@ -5,39 +5,17 @@ import { dirname } from 'path';
 import { exec } from "child_process";
 import { parseFeatureOwners } from "./parsefeatureowners.mjs";
 
-import { Octokit } from "@octokit/rest";
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Octokit.js
-// https://github.com/octokit/core.js#readme
-const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
-});
-
 const PULL_REQUEST_NUMBER = process.env.PULL_REQUEST_NUMBER;
-const HTML_URL = process.env.HTML_URL;
 console.log("Pull Request Number:", PULL_REQUEST_NUMBER);
 const ENVIROMENT = process.env.ENVIRONMENT || "staging";
 
 function assignReviewers(users) {
-  // return octokit.request(
-  //   "POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers",
-  //   {
-  //     owner: "OWNER",
-  //     repo: "REPO",
-  //     pull_number: "PULL_NUMBER",
-  //     reviewers: users,
-  //     team_reviewers: [],
-  //     headers: {
-  //       "X-GitHub-Api-Version": "2022-11-28",
-  //     },
-  //   }
-  // );
   console.log("Assigning reviewers:", users);
   const reviewers = users.join(',');
-  return execPromise(`gh pr edit ${PULL_REQUEST_NUMBER} --add-reviewer ${reviewers}`);
+  return execPromise(`gh pr edit ${PULL_REQUEST_NUMBER} --add-reviewer ${'jagadeeshgade008'}`);
 }
 
 const execPromise = (command) => {
