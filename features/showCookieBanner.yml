@@ -21,3 +21,4 @@ environments:
       - key: "2"
         segments: "*" # everyone else
         percentage: 0
+        
