@@ -21,19 +21,22 @@ console.log("Pull Request Number:", PULL_REQUEST_NUMBER);
 const ENVIROMENT = process.env.ENVIRONMENT || "staging";
 
 function assignReviewers(users) {
-  return octokit.request(
-    "POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers",
-    {
-      owner: "OWNER",
-      repo: "REPO",
-      pull_number: "PULL_NUMBER",
-      reviewers: users,
-      team_reviewers: [],
-      headers: {
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
-    }
-  );
+  // return octokit.request(
+  //   "POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers",
+  //   {
+  //     owner: "OWNER",
+  //     repo: "REPO",
+  //     pull_number: "PULL_NUMBER",
+  //     reviewers: users,
+  //     team_reviewers: [],
+  //     headers: {
+  //       "X-GitHub-Api-Version": "2022-11-28",
+  //     },
+  //   }
+  // );
+  console.log("Assigning reviewers:", users);
+  const reviewers = users.join(',');
+  return execPromise(`gh pr edit ${pullRequestNumber} --reviewer ${reviewers}`);
 }
 
 const execPromise = (command) => {
