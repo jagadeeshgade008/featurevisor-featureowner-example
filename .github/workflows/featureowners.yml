@@ -19,6 +19,9 @@ jobs:
             - name: Print the directory
               run: cd .github/scripts && ls -la
 
+            - name: Install modules
+              run: npm i @octokit/rest
+
             - name: Assign reviewers
               if: github.event_name == 'pull_request'
               run: node ./.github/scripts/assign-reviewers.mjs
