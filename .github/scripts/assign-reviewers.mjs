@@ -11,19 +11,24 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
+const pullRequestNumber = process.env.PULL_REQUEST_NUMBER;
+console.log("Pull Request Number:", pullRequestNumber);
 const ENVIROMENT = process.env.ENVIRONMENT || "staging";
 
 function assignReviewers(users) {
-  return octokit.request("POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers", {
-    owner: "OWNER",
-    repo: "REPO",
-    pull_number: "PULL_NUMBER",
-    reviewers: users,
-    team_reviewers: [],
-    headers: {
-      "X-GitHub-Api-Version": "2022-11-28",
-    },
-  });
+  return octokit.request(
+    "POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers",
+    {
+      owner: "OWNER",
+      repo: "REPO",
+      pull_number: "PULL_NUMBER",
+      reviewers: users,
+      team_reviewers: [],
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    }
+  );
 }
 
 const execPromise = (command) => {
@@ -45,7 +50,10 @@ const getFeatureOwners = () => {
 };
 
 const start = async () => {
-  let files = await execPromise(`git diff --name-only HEAD~1 HEAD`);
+  let files = await execPromise(
+    `gh pr diff ${pullRequestNumber} --color=never`
+  );
+  console.log("Changed files:", files);
   files = files
     .split("\n")
     .filter(Boolean)

@@ -24,7 +24,7 @@ jobs:
 
             - name: Assign reviewers
               if: github.event_name == 'pull_request'
-              run: node ./.github/scripts/assign-reviewers.mjs
+              run: node ./.github/scripts/assign-reviewers.mjs pullRequestNumber=${{ github.event.pull_request.number }}
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 ENVIROMENT: "staging"
