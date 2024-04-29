@@ -1,7 +1,7 @@
 import fs from "fs";
 
 import { exec } from "child_process";
-import { parseFeatureOwners } from "./parsefeatureowners.js";
+import { parseFeatureOwners } from "./parsefeatureowners.mjs";
 
 import { Octokit } from "@octokit/rest";
 
