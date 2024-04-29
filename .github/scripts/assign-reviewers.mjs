@@ -15,7 +15,7 @@ const ENVIROMENT = process.env.ENVIRONMENT || "staging";
 function assignReviewers(users) {
   console.log("Assigning reviewers:", users);
   const reviewers = users.join(',');
-  return execPromise(`gh pr edit ${PULL_REQUEST_NUMBER} --add-reviewer ${'jagadeeshgade008'}`);
+  return execPromise(`gh pr edit ${PULL_REQUEST_NUMBER} --add-reviewer ${'jagadeeshgade008@gmail.com'}`);
 }
 
 const execPromise = (command) => {
