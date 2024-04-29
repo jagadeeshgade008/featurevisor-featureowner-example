@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 
 import { exec } from "child_process";
 import { parseFeatureOwners } from "./parsefeatureowners.mjs";
@@ -44,18 +45,24 @@ const execPromise = (command) => {
 };
 
 const getFeatureOwners = () => {
-  const content = fs.readFileSync("../FEATUREOWNERS", "utf8");
+  console.log("Directory:", __dirname);
+  const content = fs.readFileSync(
+    path.join(__dirname, "..", "FEATUREOWNERS"),
+    "utf8"
+  );
   const mappings = parseFeatureOwners(content);
   return mappings;
 };
 
 const start = async () => {
-  let diffOutput = await execPromise(`gh pr diff ${PULL_REQUEST_NUMBER} --color=never`);
+  let diffOutput = await execPromise(
+    `gh pr diff ${PULL_REQUEST_NUMBER} --color=never`
+  );
 
   let files = diffOutput
-    .split('\n')
-    .filter(line => line.startsWith('diff --git'))
-    .map(line => line.split(' b/')[1])
+    .split("\n")
+    .filter((line) => line.startsWith("diff --git"))
+    .map((line) => line.split(" b/")[1])
     .filter(Boolean)
     .filter((file) => file.endsWith(".yml"));
 
