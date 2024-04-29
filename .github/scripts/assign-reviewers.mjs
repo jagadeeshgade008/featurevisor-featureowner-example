@@ -44,7 +44,7 @@ const execPromise = (command) => {
 };
 
 const getFeatureOwners = () => {
-  const content = fs.readFileSync("./FEATUREOWNERS", "utf8");
+  const content = fs.readFileSync("../FEATUREOWNERS", "utf8");
   const mappings = parseFeatureOwners(content);
   return mappings;
 };
