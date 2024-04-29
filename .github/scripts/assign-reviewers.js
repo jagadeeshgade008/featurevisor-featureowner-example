@@ -1,7 +1,7 @@
 import fs from "fs";
 
 import { exec } from "child_process";
-import { parseFeatureOwners } from "./parsefeatureowners.mjs";
+import { parseFeatureOwners } from "./parsefeatureowners.js";
 
 import { Octokit } from "@octokit/rest";
 
@@ -11,8 +11,8 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
-const pullRequestNumber = process.env.PULL_REQUEST_NUMBER;
-console.log("Pull Request Number:", pullRequestNumber);
+const PULL_REQUEST_NUMBER = process.env.PULL_REQUEST_NUMBER;
+console.log("Pull Request Number:", PULL_REQUEST_NUMBER);
 const ENVIROMENT = process.env.ENVIRONMENT || "staging";
 
 function assignReviewers(users) {
@@ -51,7 +51,7 @@ const getFeatureOwners = () => {
 
 const start = async () => {
   let files = await execPromise(
-    `gh pr diff ${pullRequestNumber} --color=never`
+    `gh pr diff ${PULL_REQUEST_NUMBER} --color=never`
   );
   console.log("Changed files:", files);
   files = files
