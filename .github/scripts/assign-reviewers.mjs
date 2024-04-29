@@ -50,8 +50,12 @@ const execPromise = (command) => {
 
 const getFeatureOwners = () => {
   console.log("Directory:", __dirname);
+  // const content = fs.readFileSync(
+  //   path.join(__dirname, "..", "FEATUREOWNERS"),
+  //   "utf8"
+  // );
   const content = fs.readFileSync(
-    path.join(__dirname, "..", "FEATUREOWNERS"),
+    `${__dirname}/../FEATUREOWNERS`,
     "utf8"
   );
   const mappings = parseFeatureOwners(content);
